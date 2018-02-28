@@ -19,17 +19,17 @@ import java.util.Map;
 import java.io.IOException;
 
 
-public class TestRoutes 
+public class TestRoutes
 {
     @BeforeClass
     public static void beforeClass() throws Exception {
       App.main(null);
-	  Thread.sleep(1000);
+	    Thread.sleep(10000);
     }
-   
+
     @AfterClass
     public static void afterClass() throws Exception {
-	  Thread.sleep(1000);
+	    Thread.sleep(1000);
       Spark.stop();
     }
 
