@@ -1,6 +1,6 @@
 ipcrm/hello_world_java:
   Env:
-    - PORT=10555
+    - PORT: "10555"
   Build:
     - mvn package
     - docker login -u "$DISTELLI_DOCKER_USERNAME" -p "$DISTELLI_DOCKER_PW" $DISTELLI_DOCKER_ENDPOINT
