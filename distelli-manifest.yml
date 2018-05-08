@@ -1,13 +1,11 @@
 ipcrm/hello_world_java:
-  InstallTemplates
-    - [ "templates/docker-compose.yml", "." ]
+  Env:
+    - PORT=10555
   Build:
     - mvn package
     - docker login -u "$DISTELLI_DOCKER_USERNAME" -p "$DISTELLI_DOCKER_PW" $DISTELLI_DOCKER_ENDPOINT
     - docker build --quiet=false -t "$DISTELLI_DOCKER_REPO" $DISTELLI_DOCKER_PATH
     - docker tag "$DISTELLI_DOCKER_REPO" "$DISTELLI_DOCKER_REPO:$DISTELLI_BUILDNUM"
     - docker push "$DISTELLI_DOCKER_REPO:$DISTELLI_BUILDNUM"
-  PkgInclude:
-    - 'docker-compose.yml'
   Start:
-    - sudo docker stack deploy -c docker-compose.yml hello_world_java
+    - sudo docker service create --name hello_world_java --publish published=$PORT,target=9999 --replicas 2 $DISTELLI_DOCKER_REPO:$DISTELLI_BUILDNUM
