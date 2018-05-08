@@ -9,9 +9,9 @@ ipcrm/hello_world_java:
     - docker push "$DISTELLI_DOCKER_REPO:$DISTELLI_BUILDNUM"
   Start:
     - if [ `sudo docker service  inspect "$DISTELLI_ENV" &> /dev/null` ]; then
-    -   sudo docker service update --image "$DISTELLI_DOCKER_REPO:$DISTELLI_BUILDNUM" "$DISTELLI_ENV"
+    -   sudo docker service update --detach=false --image "$DISTELLI_DOCKER_REPO:$DISTELLI_BUILDNUM" "$DISTELLI_ENV"
     - else
-    -   sudo docker service create --name "$DISTELLI_ENV" --publish published="$PORT",target=9999 --replicas 2 "$DISTELLI_DOCKER_REPO:$DISTELLI_BUILDNUM"
+    -   sudo docker service create --detach=false --name "$DISTELLI_ENV" --publish published="$PORT",target=9999 --replicas 2 "$DISTELLI_DOCKER_REPO:$DISTELLI_BUILDNUM"
     - fi
   Terminate:
     - sudo docker service rm "$DISTELLI_ENV"
