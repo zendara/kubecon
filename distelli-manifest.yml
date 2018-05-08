@@ -1,4 +1,4 @@
-ipcrm/hello_world_java:
+ipcrm/hello_world_java1:
   Env:
     - PORT: "10555"
   Build:
