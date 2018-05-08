@@ -8,6 +8,6 @@ ipcrm/hello_world_java:
     - docker tag "$DISTELLI_DOCKER_REPO" "$DISTELLI_DOCKER_REPO:$DISTELLI_BUILDNUM"
     - docker push "$DISTELLI_DOCKER_REPO:$DISTELLI_BUILDNUM"
   PkgInclude:
-    - docker-compose.yml
+    - 'docker-compose.yml'
   Start:
     - sudo docker stack deploy -c docker-compose.yml hello_world_java
