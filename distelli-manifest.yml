@@ -1,5 +1,5 @@
 ipcrm/hello_world_java:
-  InstallTemplates:
+  InstallTemplates
     - [ "templates/docker-compose.yml", "." ]
   Build:
     - mvn package
@@ -7,5 +7,7 @@ ipcrm/hello_world_java:
     - docker build --quiet=false -t "$DISTELLI_DOCKER_REPO" $DISTELLI_DOCKER_PATH
     - docker tag "$DISTELLI_DOCKER_REPO" "$DISTELLI_DOCKER_REPO:$DISTELLI_BUILDNUM"
     - docker push "$DISTELLI_DOCKER_REPO:$DISTELLI_BUILDNUM"
+  PkgInclude:
+    - docker-compose.yml
   Start:
-    - docker stack deploy -c docker-compose.yml hello_world_java
+    - sudo docker stack deploy -c docker-compose.yml hello_world_java
