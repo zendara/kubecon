@@ -8,4 +8,8 @@ ipcrm/hello_world_java:
     - docker tag "$DISTELLI_DOCKER_REPO" "$DISTELLI_DOCKER_REPO:$DISTELLI_BUILDNUM"
     - docker push "$DISTELLI_DOCKER_REPO:$DISTELLI_BUILDNUM"
   Start:
-    - sudo docker service create --name hello_world_java --publish published=$PORT,target=9999 --replicas 2 $DISTELLI_DOCKER_REPO:$DISTELLI_BUILDNUM
+    - if [ `sudo docker service  inspect hello_world_java &> /dev/null` ]; then
+    -   sudo docker service udpate --image $DISTELLI_DOCKER_REPO:$DISTELLI_BUILDNUM hello_world_java
+    - else
+    -   sudo docker service create --name hello_world_java --publish published=$PORT,target=9999 --replicas 2 $DISTELLI_DOCKER_REPO:$DISTELLI_BUILDNUM
+    - fi
