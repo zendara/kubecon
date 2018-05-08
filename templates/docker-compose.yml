@@ -1,0 +1,32 @@
+version: "3"
+services:
+  web:
+    image: {{DISTELLI_DOCKER_REPO}}:{{DISTELLI_BUILDNUM}}
+    deploy:
+      replicas: 3
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 50M
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+    ports:
+      - "10999:9999"
+    networks:
+      - hello_world_java
+  visualizer:
+    image: dockersamples/visualizer:stable
+    ports:
+      - "8080:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+    networks:
+      - hello_world_java
+networks:
+  hello_world_java:
