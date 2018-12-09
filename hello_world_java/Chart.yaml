@@ -1,6 +1,6 @@
 name: hello_world_java
-version: 0.2.1
-appVersion: 1.5.0
+version: 0.2.2
+appVersion: 1.4.1
 home: https://github.com/puppetlabs/pipelines-self-paced
 description: Hello World Java Demo App
 keywords:
